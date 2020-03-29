@@ -1,3 +1,5 @@
+#Importing necessary packages
+
 import requests 
 from bs4 import BeautifulSoup 
 from tabulate import tabulate 
@@ -5,14 +7,16 @@ import os
 import numpy as np 
 import matplotlib.pyplot as plt
 
+#Extracting Data from website
+
 extract_contents = lambda row: [x.text.replace('\n', '') for x in row] 
-URL = 'https://www.mohfw.gov.in/' #Information extracted from Ministry of Health & Family welfare's website
+URL = 'https://www.mohfw.gov.in/' 
   
 SHORT_HEADERS = ['SNo', 'State','Indian-Confirmed', 
                  'Foreign-Confirmed','Cured','Death'] 
   
 response = requests.get(URL).content 
-soup = BeautifulSoup(response, 'html.parser') #BS- HTML/XML parser
+soup = BeautifulSoup(response, 'html.parser') 
 header = extract_contents(soup.tr.find_all('th')) 
 stats = [] 
 all_rows = soup.find_all('tr') 
